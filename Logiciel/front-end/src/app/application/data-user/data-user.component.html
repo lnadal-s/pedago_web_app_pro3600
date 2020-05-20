@@ -1,0 +1,21 @@
+<div *ngIf="user; else elseBlock">
+    <div class="userdata">
+        <div class="img-center">
+            <div class="pic">
+                <img class="imguser" [src]="user.urlimg">
+            </div>
+        </div>
+        <div style='text-align: center'>
+            <b>Login:</b> {{user.username}} <br /><br />
+            <b>Mail:</b> {{user.courriel}} <br /><br />
+            <b>Level: </b> {{user.level}} <br /><br />
+        </div>
+        <div style='text-align: center'>
+            <p><b>Barre de progression:</b></p>
+            <progress value={{user?.exp}} max="100"></progress>
+            <p>{{user.exp}}%</p>
+        </div>
+          
+    </div>
+</div>
+<ng-template #elseBlock>Loading...</ng-template>

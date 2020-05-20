@@ -1,0 +1,15 @@
+
+<nb-card >
+    <app-tree></app-tree>
+</nb-card>
+
+
+<input nbInput fullWidth="true" fieldsize="large" shape="round" status="Infos" 
+style="text-align: left; padding: 15px 15px 15px 15px; margin: 1px 1px 30px 1px;" 
+[(ngModel)]="searchText" placeholder="Recherchez vos projets ici"> <br>
+
+<div class="ok" *ngFor="let projet of projetS | filter : searchText" > 
+    <app-projet [projet]="projet" ></app-projet> 
+</div>
+
+

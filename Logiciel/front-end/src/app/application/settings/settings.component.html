@@ -1,0 +1,74 @@
+<nb-layout center>
+  <nb-layout-column>
+    <form #f='ngForm' (ngSubmit)="onSubmit(f)" id="pwdform">
+    <nb-card>
+      <nb-card-header>Changer de mot de passe</nb-card-header>
+
+        <nb-card-body class="cadres">
+          <br />Votre nouveau mot de passe devra avoir 8 caractères, une majuscule, une minuscule et un chiffre et ne
+          pourra pas être identique à votre identifiant.
+        </nb-card-body>
+
+        <nb-card-body>
+          <div class="form-group">
+            <label for="oldpassword"> Ancien mot de passe: </label>
+            <input type="password" #oldpassword="ngModel" class="form-control" ngModel shape="semi-round"
+              name="oldpassword" placeholder="******" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+            <div class="errorform" *ngIf="oldpassword.invalid && (f.submitted || oldpassword.touched)">
+              <div *ngIf="oldpassword.errors.required"> Password is required. </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password"> Nouveau mot de passe: </label>
+            <input type="password" #password="ngModel" class="form-control" ngModel name="password" placeholder="******"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+            <div class="errorform" *ngIf="password.invalid && (f.submitted || password.touched)">
+              <div *ngIf="password.errors.required"> Password is required. </div>
+              <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase
+                letter, and at least 8 or more characters.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmpassword"> Confirmer le nouveau mot de passe: </label>
+            <input type="password" #confirmpassword="ngModel" class="form-control" ngModel name="confirmpassword"
+              placeholder="******" required pattern="{{ password.value}}">
+            <div class="errorform"
+              *ngIf="confirmpassword.invalid && (f.submitted || confirmpassword.touched) && password.valid">
+              <div *ngIf="confirmpassword.errors.required"> Confirm password is required. </div>
+              <div *ngIf="confirmpassword.errors.pattern"> Password & Confirm Password does not match.</div>
+            </div>
+          </div>
+          <div class="errorform" [hidden]="!f.submitted && (f.valid || f.pristine)"> Invalid informations</div>
+          <button type="submit" class="btn btn-success">Valider</button>
+        </nb-card-body>
+    </nb-card>
+    </form>
+
+
+    <div *ngIf="pwd_change" >
+      <h2>Le mot de passe a bien été modifié!</h2>
+    </div>
+
+
+
+    <nb-card>
+      <nb-card-header>Télécharger une photo de profil</nb-card-header>
+      <nb-card-body>
+        <br />
+        Cliquez sur "Sélectionner l'image" pour parcourir vos documents.
+        <br /><br />
+        <input nbInput style="display: none" id="myFile" type="file" nbInput (change)="onFileChanged($event)" #fileInput
+          accept="image/*">
+        <input nbButton (click)="fileInput.click()" type="button" value="Sélectionner l'image" > &nbsp;
+        <input nbButton (click)="onUpload()" type="submit" value="Valider"><br />
+      </nb-card-body>
+    </nb-card>
+
+    <div *ngIf="photo_upload" >
+      <h2>La photo a bien été enregistrée! Vous pouvez maintenant recharger la page pour qu'elle s'affiche.</h2>
+    </div>
+
+  </nb-layout-column>
+</nb-layout>

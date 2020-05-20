@@ -1,0 +1,86 @@
+<nb-card>
+
+    <nb-card-header>{{projet.nom}}</nb-card-header>
+
+    <nb-card-body>
+        {{projet.Infos}}
+    </nb-card-body>
+
+    <nb-card-body *ngIf="!!projet.encadrant">
+        Encadrant: {{projet.encadrant}}
+    </nb-card-body>
+
+    <nb-card-footer *ngIf="!projet.encadrant">
+        Aucun encadrant n'a été attribué pour ce projet pour l'instant.
+    </nb-card-footer>
+
+    <nb-card-footer *ngIf="!projet.note" style="color:red;">
+        Vous n'avez pas encore envoyé votre projet.
+    </nb-card-footer>
+    <nb-card-footer *ngIf="!!projet.note">Note: {{projet.note}}%
+    </nb-card-footer>
+</nb-card>
+
+<nb-card *ngIf="!isUploaded">
+    <nb-card-header>Faire corriger votre projet:</nb-card-header>
+    <nb-card-body>
+        Sélectionner votre projet puis cliquez sur Corriger pour envoyer votre projet. Une fois que vous l'avez envoyé,
+        rafraichissez la page.
+    </nb-card-body>
+    <nb-card-footer>
+        <input nbInput style="display: none" id="myFile" type="file" nbInput (change)="onFileChanged($event)"
+            #fileInput>
+        <input nbButton (click)="fileInput.click()" type="button" value="Sélectionner le projet"> &nbsp;
+        <input nbButton (click)="onUpload()" type="submit" value="Faire corriger le projet"><br />
+    </nb-card-footer>
+</nb-card>
+
+
+<nb-card *ngIf="isUploaded">
+    <nb-card-body style="color:green">
+        Félicitations, vous avez bien envoyé votre projet!
+    </nb-card-body>
+    <nb-card-footer *ngIf="!projet.note" style="font-style: italic">Votre fichier est en train d'être corrigé.
+    </nb-card-footer>
+    <nb-card-footer>
+        Pour effectuer une nouvelle tentative et remettre un nouveau travail, cliquez <input nbButton type="button"
+            size="tiny" value="ici" (click)="newUpload()" />
+    </nb-card-footer>
+</nb-card>
+
+<nb-card>
+    <nb-card-header> Statistiques pour le projet {{projet.nom}} </nb-card-header>
+
+    <nb-card-body> Veuillez cliquer sur le bouton pour mettre à jour les statistiques:
+        <input nbButton type="button" value="Rafraîchir" (click)="updateHistorique()" />
+    </nb-card-body>
+
+    <nb-card-footer>
+        <p style="font-weight: bold"> Historique de vos tentatives:</p>
+        <p *ngIf="!historique" style="font-style: italic">Vous n'avez pas encore remis de travail pour ce projet, ou
+            vous n'avez pas encore été corrigé. Vous pourrez retrouver les résultats de vos tentatives ici. Pensez à
+            cliquer régulièrement sur rafraîchir pour voir vos résultats.</p>
+        <p *ngIf="!!historique">
+            Listes des tentatives:
+            <tr *ngFor="let hist of historique">
+                <td> Le {{hist.date}}: {{hist.note}}%</td>
+            </tr>
+        </p>
+    </nb-card-footer>
+</nb-card>
+
+
+<nb-card>
+    <nb-card-header>Réussite globale du projet</nb-card-header>
+    <nb-card-body>
+
+        <div>
+            <div style="display: block">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                    [legend]="barChartLegend" [chartType]="barChartType">
+                </canvas>
+            </div>
+        </div>
+
+    </nb-card-body>
+</nb-card>

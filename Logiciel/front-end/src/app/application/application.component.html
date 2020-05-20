@@ -1,0 +1,36 @@
+<nb-layout center>
+
+<nb-layout-header subheader>
+    <button nbButton status="success" size="small"  size="tiny" (click)="toggle()" >Toggle</button>
+    
+    <nb-card-body class="nav-itmb">
+    <button nbButton outline status="primary" size="small" routerLink="/home" routerLinkActive="active">accueil</button>
+    <button nbButton outline status="primary" size="small" routerLink="/roadmap" routerLinkActive="active">roadmap</button>
+    <button nbButton outline status="primary" size="small" routerLink="/settings" routerLinkActive="active">settings</button>
+    </nb-card-body>
+
+    <nb-card-body class="auth-buttons">
+
+    <nb-user *ngIf="_authService.loggedIn()"  size="tiny"
+         name="{{ user.username }}"
+         title="Student"
+         [showTitle]="false"
+         [picture]="user.urlimg">
+    </nb-user>
+    <button nbButton outline status="primary" size="small" (click)="_authService.logoutUser()" routerLink='' routerLinkActive="active">Logout</button>
+    </nb-card-body>
+</nb-layout-header>
+
+<nb-sidebar *ngIf="_authService.loggedIn()" responsive="true">
+  <nb-sidebar-header>
+  </nb-sidebar-header>
+    <app-data-user></app-data-user>
+</nb-sidebar>
+
+<nb-layout-column>
+  <router-outlet></router-outlet>
+</nb-layout-column>
+
+<nb-layout-footer>A student projet from Telecom SudParis</nb-layout-footer>
+</nb-layout>
+

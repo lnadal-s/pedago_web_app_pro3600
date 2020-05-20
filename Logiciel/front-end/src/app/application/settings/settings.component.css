@@ -1,0 +1,15 @@
+
+
+nb-card-body.cadres {
+  align-items: stretch;
+}
+
+nb-header.titre{
+  font-size: larger;
+  font: bold;
+}
+nb-header.succes{
+  font-size: 12em;
+  font: bold;
+  color: green;
+}

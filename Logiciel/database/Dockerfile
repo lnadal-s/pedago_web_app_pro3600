@@ -1,0 +1,11 @@
+FROM mysql:latest
+
+ENV MYSQL_DATABASE Pro3600
+ENV MYSQL_ROOT_PASSWORD Root1234
+ENV MYSQL_USER mysql
+ENV MYSQL_PASSWORD Root1234
+ENV DATABASE_HOST db
+
+EXPOSE 3306
+
+COPY ./sql-scripts /docker-entrypoint-initdb.d/

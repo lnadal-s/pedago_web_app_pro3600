@@ -1,0 +1,24 @@
+.imguser{
+    width: 14em;
+}
+.userdata{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 100%;
+}
+.img-center{
+    margin-left: auto;
+    margin-right: auto;
+    width: 10em;
+    padding-top: 0em;
+    margin-bottom: 4em;
+}
+
+.pic {
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}

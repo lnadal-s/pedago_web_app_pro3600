@@ -1,0 +1,26 @@
+<nb-card class="ok1">
+  <nb-card-header style="position: relative;">
+    {{projet.nom}}
+    <br>
+    <nb-badge text="{{projet.tag1}}" status="Info" style="position:static; text-align: center;"></nb-badge>
+    <nb-badge text="{{projet.tag2}}" status="Info" style="position: static; text-align: center;"></nb-badge>
+    <nb-badge text="{{projet.tag3}}" status="Info" style="position: static; text-align: center;"></nb-badge>
+    <nb-badge text="{{projet.tag4}}" status="Info" style="position: static; text-align: center;"></nb-badge>
+  </nb-card-header>
+
+  <nb-card-body>
+    {{projet.Infos}}
+  </nb-card-body>
+
+  <nb-card-footer *ngIf="!projet.isRegistered"> Veuillez vous inscrire pour accéder au projet.
+  </nb-card-footer>
+
+  <nb-card-footer>
+    <button *ngIf="!projet.access" nbButton outline status="success" size="small" disabled>S'inscrire</button>
+
+    <button nbButton outline status="success" size="small" *ngIf="!projet.isRegistered && !!projet.access" (click)="Register()">S'inscrire</button>
+    <button nbButton outline status="danger" size="small" *ngIf="projet.isRegistered" style="position:absolute; right: 5em;" (click)="UnRegister()">Se désinscrire</button>
+    <button nbButton outline status="info" size="small" *ngIf="projet.isRegistered" (click)="onSearch(projet.idprojets)">voir le projet</button>
+  </nb-card-footer>
+
+</nb-card>

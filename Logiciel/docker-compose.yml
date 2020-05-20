@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    db:
+        build: ./database
+    back-end:
+        build: ./back-end
+        ports:
+            - "3000:3000"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        depends_on:
+            - db
+        restart: on-failure
+    front-end:
+        build: ./front-end
+        ports:
+            - "4200:4200"
+        depends_on:
+            - back-end
